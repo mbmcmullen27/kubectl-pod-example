@@ -2,6 +2,8 @@
 kubectl exec from a pod
 
 ```sh
+# alias k=kubectl
+
 # run blinky server
 k run blinky --image=mcmull27/blinky:latest --env PORT=80
 k expose pod blinky --PORT=80
