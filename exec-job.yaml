@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kubectl-exec
+spec:
+  template:
+    spec:
+      serviceAccountName: kubectl-exec
+      containers:
+      - name: kubectl-exec
+        image: rancher/kubectl:v1.23.3
+        command: ["kubectl"]
+        # args: ["exec", "curl", "--", "env"]
+        args: ["exec", "curl", "--", "curl", "-s", "blinky/app/blinky"]
+      restartPolicy: Never
+  backoffLimit: 4

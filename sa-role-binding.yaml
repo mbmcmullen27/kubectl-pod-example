@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubectl-exec
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: create-exec-pods
+rules:
+  - apiGroups: [""]
+    resources:
+      - pods
+      - pods/exec
+    verbs:
+      - get
+      - list
+      - delete
+      - create
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: create-exec 
+subjects:
+  - kind: ServiceAccount
+    name: kubectl-exec
+roleRef:
+  kind: Role
+  name: create-exec-pods
+  apiGroup: rbac.authorization.k8s.io

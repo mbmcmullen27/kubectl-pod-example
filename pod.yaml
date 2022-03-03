@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exec-curl
+spec:
+  serviceAccountName: kubectl-exec
+  containers:
+    - name: kubectl
+      image: rancher/kubectl:v1.23.3
+      command: ["kubectl"]
+      args: ["exec", "curl", "--", "curl", "-s", "blinky/app/blinky"]
